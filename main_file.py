@@ -38,9 +38,12 @@ async def clearurl_hndlr( event ) :
 			input_url = None
 			if isinstance(entity, MessageEntityTextUrl) :
 				input_url = entity.url
+                                print('1 '+input_url)
+                                return
 			elif isinstance(entity, MessageEntityUrl) :
 				input_url = event.message.text[entity.offset :entity.offset + entity.length]
-			
+			        print('2 '+input_url)
+                                return
 			if input_url is not None :
 				clean_url = clear_url(input_url)
 				if input_url != clean_url:
