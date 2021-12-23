@@ -1,4 +1,6 @@
-api_id = 12345
-api_hash = '0123456789abcdef0123456789abcdef'
-bot_token = '12345:0123456789abcdef0123456789abcdef'
+import os
+
+api_id = int(os.environ.get("API_ID", 12345))
+api_hash = os.environ.get('API_HASH')
+bot_token = os.environ.get('BOT_TOKEN')
 
