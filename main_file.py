@@ -37,30 +37,9 @@ async def clearurl_hndlr( event ) :
 		for entity in event.message.entities :
 			input_url = None
 			if isinstance(entity, MessageEntityTextUrl) :
-				input_url = entity.url
-                                print('1 '+input_url)
-                                return
+				print('1 '+entity.url)
 			elif isinstance(entity, MessageEntityUrl) :
-				input_url = event.message.text[entity.offset :entity.offset + entity.length]
-			        print('2 '+input_url)
-                                return
-			if input_url is not None :
-				clean_url = clear_url(input_url)
-				if input_url != clean_url:
-					to_send.append(clean_url)
-					
-		if to_send :
-			to_send_txt = "\n\n".join(i for i in to_send)
-			await event.reply(f"\n{to_send_txt}", link_preview = False)
-		else:
-			chat = await event.get_chat()
-			if isinstance(chat, User) :  # don't disturb the group, only show at private chat
-				await event.reply("No unclean links found!")
-	else :
-		chat = await event.get_chat()
-		if isinstance(chat, User) :  # don't disturb the group, only throw error at private chat
-			await event.reply("The message did not contain any links for me to clean!")
-	raise events.StopPropagation
+				print('2 '+event.message.text[entity.offset :entity.offset + entity.length])
 
 
 @bot.on(events.InlineQuery)
